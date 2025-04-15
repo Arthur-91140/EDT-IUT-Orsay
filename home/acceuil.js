@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                const rotateY = (x - centerX) / 20;
-                const rotateX = (centerY - y) / 20;
+                const rotateY = (x - centerX) / 60;
+                const rotateX = (centerY - y) / 60;
                 
                 container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });

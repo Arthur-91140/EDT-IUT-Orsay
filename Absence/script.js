@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search button click handler
     searchBtn.addEventListener('click', async function() {
         const studentId = studentIdInput.value.trim();
+
+
         
         if (!studentId) {
             showError('Veuillez entrer votre identifiant étudiant.');
@@ -208,54 +210,64 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
     
-    // Display results in the UI
     function displayResults(absences) {
         if (!absences || absences.length === 0) {
             showError('Aucune absence trouvée pour cet étudiant.');
             return;
         }
-        
-        // Get student info from the first absence
+    
+        // Infos de l'étudiant
         const studentName = absences[0].nomEtudiant;
         const studentFirstname = absences[0].prenomEtudiant;
         const studentCode = absences[0].codeEtudiant;
-        
-        // Update student info
+    
         document.getElementById('student-name').textContent = studentName;
         document.getElementById('student-firstname').textContent = studentFirstname;
         document.getElementById('student-code').textContent = studentCode;
-        
-        // Filter absences by type
+    
+        // Filtrage des absences
         const absencesType1 = absences.filter(a => a.typeAbsence === 1 && a.deleted === 0);
         const absencesType2 = absences.filter(a => a.typeAbsence === 2 && a.deleted === 0);
         const absencesType3 = absences.filter(a => a.typeAbsence === 3 && a.deleted === 0);
-        
-        // Fill tables
+    
+        // Sélection des tableaux
         const absencesTable = document.getElementById('absences-table');
+        const retardsTable = document.getElementById('retards-table');
+        const exclusionsTable = document.getElementById('exclusions-table');
+    
+        // Initialisation des totaux
         let totalAbsenceMinutes = 0;
-        
+        let totalRetardMinutes = 0;
+        let totalExclusionMinutes = 0;
+    
+        // Traitement des absences
         absencesType1.forEach(absence => {
             const duration = addRowToTable(absencesTable, absence);
             totalAbsenceMinutes += duration;
         });
-        
-        const retardsTable = document.getElementById('retards-table');
+    
+        // Traitement des retards
         absencesType2.forEach(absence => {
-            addRowToTable(retardsTable, absence);
+            const duration = addRowToTable(retardsTable, absence);
+            totalRetardMinutes += duration;
         });
-        
-        const exclusionsTable = document.getElementById('exclusions-table');
+    
+        // Traitement des exclusions
         absencesType3.forEach(absence => {
-            addRowToTable(exclusionsTable, absence);
+            const duration = addRowToTable(exclusionsTable, absence);
+            totalExclusionMinutes += duration;
         });
-        
-        // Update total absence hours
+    
+        // Affichage des durées formatées
         document.getElementById('absence-hours').textContent = formatDuration(totalAbsenceMinutes);
-        
-        // Show results
+        document.getElementById('retard-hours').textContent = formatDuration(totalRetardMinutes);
+        document.getElementById('exclusion-hours').textContent = formatDuration(totalExclusionMinutes);
+    
+        // Affichage des résultats
+        const resultEl = document.getElementById('result');
         resultEl.style.display = 'block';
-        
-        // Animate counters
+    
+        // Animation des compteurs
         setTimeout(() => {
             animateCounter(document.getElementById('absence-count'), absencesType1.length);
             animateCounter(document.getElementById('retard-count'), absencesType2.length);
@@ -270,4 +282,20 @@ document.addEventListener('DOMContentLoaded', function() {
         loadingEl.style.display = 'none';
         resultEl.style.display = 'none';
     }
+    // quand on appui sur entrer ça lance la recherche
+    studentIdInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchBtn.click();
+        }
+    });
+
+    const backBtn = document.getElementById('back-btn');
+
+    backBtn.addEventListener('click', () => {
+        resultEl.style.display = 'none';
+        studentIdInput.value = '';
+        studentIdInput.focus();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
 });

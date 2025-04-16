@@ -102,6 +102,15 @@ function init() {
     
     // Initialiser les dates (aujourd'hui et semaine en cours)
     initDates();
+
+    const backBtn = document.getElementById('back-btn');
+
+    backBtn.addEventListener('click', () => {
+        resultEl.style.display = 'none';
+        studentIdInput.value = '';
+        studentIdInput.focus();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
 
 // Fonction d'initialisation de la modale
@@ -1017,6 +1026,8 @@ function ouvrirModaleCours(seance, jourStr = null, dateStr = null) {
     // Bloquer le scroll du body
     document.body.style.overflow = 'hidden';
 }
+
+
 
 function fermerModaleCours() {
     if (elements.modalOverlay) {

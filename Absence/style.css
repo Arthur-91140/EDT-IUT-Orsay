@@ -49,6 +49,7 @@ body {
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
     min-height: 100vh;
+    
 }
 
 .container {
@@ -723,4 +724,30 @@ h4::after {
     th, td {
         border-bottom: 1px solid #ccc;
     }
+}
+
+
+.header-btn {
+    margin-top: 15px;
+    background: white;
+    color: #63003C;
+    border: 2px solid #63003C;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;              /* <-- important pour centrer */
+    text-align: center;
+    text-decoration: none;
+    width: fit-content;
+    margin-left: auto;           /* <-- centrer */
+    margin-right: auto;          /* <-- centrer */
+}
+
+.header-btn:hover {
+    background: #63003C;
+    color: white;
 }

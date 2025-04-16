@@ -1417,3 +1417,24 @@ input:focus {
     background-color: var(--ds-bg);
     border: 1px solid var(--ds-border);
 }
+
+.header-btn {
+    margin-top: 15px;
+    background: white;
+    color: #63003C;
+    border: 2px solid #63003C;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.header-btn:hover {
+    background: #63003C;
+    color: white;
+}

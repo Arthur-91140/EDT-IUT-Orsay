@@ -1,6 +1,6 @@
 # EDT-IUT-Orsay
 # Emploi du Temps IUT d'Orsay
-# ⚠️Une panne importante est en cours sur le portage mobile du site.⚠️
+# ⚠️Une panne importante est en cours sur le portage mobile du site.⚠
 
 Application web permettant de consulter l'emploi du temps des étudiants de l'IUT d'Orsay.
 

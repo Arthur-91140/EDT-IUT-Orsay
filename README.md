@@ -3,7 +3,6 @@
 
 Application web permettant de consulter l'emploi du temps des étudiants de l'IUT d'Orsay.
 
-
 ## Fonctionnalités
 
 - **Authentification simplifiée** : Connexion via identifiant au format prénom.nom

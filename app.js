@@ -552,218 +552,91 @@ function convertirEnMinutes(heure) {
 
   
 function afficherVueHebdomadaire() {
-      
+    const heuresDebut = 8; // Heure de début de la journée
+    const heuresFin = 19; // Heure de fin de la journée
+    const pixelsPar30Minutes = 30; // Hauteur en pixels pour 30 minutes
+
     const moisAnnee = getMoisAnnee(state.semaineDebut);
     const numeroSemaine = getNumeroSemaine(state.semaineDebut);
     const dateDebut = formatDateFr(state.semaineDebut);
     const dateFin = formatDateFr(state.semaineFin);
-    
+
     elements.semaineTitre.innerHTML = `
         ${moisAnnee} - Semaine ${numeroSemaine}<br>
         <span style="font-size: 0.8rem;">Du ${dateDebut} au ${dateFin}</span>
     `;
-    
-      
+
     elements.semaineBody.innerHTML = '';
 
-      
     const jours = getJoursSemaine(state.semaineDebut);
-    
-      
+
     const table = document.createElement('table');
     table.className = 'semaine-table';
-    
-      
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    
-    jours.forEach(jour => {
-        const th = document.createElement('th');
-        th.innerHTML = `${jour.nom}<br><span style="font-size: 0.8rem;">${formatDateFr(jour.date)}</span>`;
-        headerRow.appendChild(th);
-    });
-    
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-    
-      
+
     const tbody = document.createElement('tbody');
     const bodyRow = document.createElement('tr');
-    
-      
-    const pixelsParMinuteCours = 1;   
-    
-      
+
     jours.forEach(jour => {
         const cell = document.createElement('td');
         cell.className = 'jour-column';
-        
-          
-        const seancesJour = getSeancesJour(state.emploiDuTemps, jour.date);
-        
-          
-        if (seancesJour.length === 0) {
-            const emptyDay = document.createElement('div');
-            emptyDay.className = 'empty-day-message';
-            emptyDay.style.padding = '1rem';
-            emptyDay.style.margin = '0';
-            emptyDay.textContent = 'Aucun cours';
-            cell.appendChild(emptyDay);
-        } else {
-              
-            seancesJour.sort((a, b) => a.heureSeance - b.heureSeance);
-            
-              
-            const coursContainer = document.createElement('div');
-            coursContainer.className = 'jour-cours';
-            
-              
-            let derniereHeureFin = null;
-            
-              
-            seancesJour.forEach(seance => {
-                  
-                const heureDebutActuel = convertirEnMinutes(seance.heureSeance);
-                
-                  
-                const heuresDuree = Math.floor(seance.dureeSeance / 100);
-                const minutesDuree = seance.dureeSeance % 100;
-                const dureeCoursMinutes = heuresDuree * 60 + minutesDuree;
-                
-                  
-                const heureFinActuel = heureDebutActuel + dureeCoursMinutes;
-                
-                  
-                if (derniereHeureFin !== null) {
-                    const pauseMinutes = heureDebutActuel - derniereHeureFin;
-                    
-                      
-                    if (pauseMinutes > 15) {
-                          
-                        const pauseElement = document.createElement('div');
-                        pauseElement.className = 'cours-gap';
-                        
-                          
-                        const hauteurPause = pauseMinutes * pixelsParMinuteCours;
-                        pauseElement.style.height = `${hauteurPause}px`;
-                        
-                          
-                        let pauseTexte = '';
-                        if (pauseMinutes >= 60) {
-                            const heures = Math.floor(pauseMinutes / 60);
-                            const minutes = pauseMinutes % 60;
-                            pauseTexte = `${heures}h${minutes > 0 ? minutes.toString().padStart(2, '0') : ''}`;
-                        } else {
-                            pauseTexte = `${pauseMinutes} min`;
-                        }
-                        
-                        pauseElement.setAttribute('data-duree', pauseTexte);
-                        coursContainer.appendChild(pauseElement);
-                    }
+        cell.style.position = 'relative'; // Position relative pour placer les cours
+
+        // Ajoutez une grille horaire avec des intervalles de 30 minutes
+        for (let heure = heuresDebut; heure <= heuresFin; heure++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                const heureDiv = document.createElement('div');
+                heureDiv.className = 'heure-ligne';
+                heureDiv.style.height = `${pixelsPar30Minutes}px`;
+                if (minute === 0) {
+                    heureDiv.textContent = `${heure}h`;
+                } else {
+                    heureDiv.textContent = `${heure}h${minute.toString().padStart(2, '0')}`;
                 }
-                
-                const coursItem = document.createElement('div');
-                coursItem.className = `semaine-cours ${getClasseTypeCours(seance.aliasActivite)}`;
-                
-                // Ajouter le style curseur pointer pour la modale
-                coursItem.style.cursor = 'pointer';
-                
-                  
-                const hauteurCours = dureeCoursMinutes * pixelsParMinuteCours;
-                coursItem.style.minHeight = `${Math.max(hauteurCours, 85)}px`;   
-                
-                  
-                const coursHeader = document.createElement('div');
-                coursHeader.className = 'semaine-cours-header';
-                
-                  
-                const coursTitle = document.createElement('div');
-                coursTitle.className = 'semaine-cours-title';
-                coursTitle.textContent = seance.nomMatiere;
-                coursHeader.appendChild(coursTitle);
-                
-                  
-                const coursType = document.createElement('div');
-                coursType.className = `cours-type ${getClasseTypeCours(seance.aliasActivite)}`;
-                coursType.textContent = seance.nomActivite;
-                coursHeader.appendChild(coursType);
-                
-                coursItem.appendChild(coursHeader);
-                
-                  
-                const coursTime = document.createElement('div');
-                coursTime.className = 'semaine-cours-time';
-                coursTime.textContent = `${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}`;
-                coursItem.appendChild(coursTime);
-                
-                  
-                const coursDetails = document.createElement('div');
-                coursDetails.className = 'semaine-cours-details';
-                
-                  
-                if (seance.nomProf && seance.prenomProf) {
-                      
-                    const profNoms = seance.nomProf.split(', ');
-                    const profPrenoms = seance.prenomProf.split(', ');
-                    
-                    const profsUniques = [];
-                    for (let i = 0; i < profNoms.length; i++) {
-                        const nomComplet = `${profPrenoms[i] || ''} ${profNoms[i] || ''}`.trim();
-                        if (nomComplet && !profsUniques.includes(nomComplet)) {
-                            profsUniques.push(nomComplet);
-                        }
-                    }
-                    
-                    if (profsUniques.length > 0) {
-                        const coursProf = document.createElement('div');
-                        coursProf.className = 'semaine-cours-prof';
-                        coursProf.textContent = profsUniques.join(', ');
-                        coursDetails.appendChild(coursProf);
-                    }
-                }
-                
-                  
-                if (seance.nomSalle || seance.aliasSalle) {
-                    const salleInfo = seance.aliasSalle || seance.nomSalle;
-                    
-                      
-                    const sallesNoms = salleInfo.split(', ');
-                    const sallesUniques = [...new Set(sallesNoms)].filter(s => s && s !== 'null');
-                    
-                    if (sallesUniques.length > 0) {
-                        const coursSalle = document.createElement('div');
-                        coursSalle.className = 'semaine-cours-salle';
-                        coursSalle.textContent = sallesUniques.join(', ');
-                        coursDetails.appendChild(coursSalle);
-                    }
-                }
-                
-                coursItem.appendChild(coursDetails);
-                coursContainer.appendChild(coursItem);
-                
-                // Ajouter l'événement de clic pour ouvrir la modale
-                coursItem.addEventListener('click', function() {
-                    const jourStr = getJourSemaine(seance.dateSeance);
-                    const dateStr = formatDateFr(seance.dateSeance);
-                    ouvrirModaleCours(seance, jourStr, dateStr);
-                });
-                  
-                derniereHeureFin = heureFinActuel;
-            });
-            
-            cell.appendChild(coursContainer);
+                cell.appendChild(heureDiv);
+            }
         }
-        
+
+        // Positionnez les cours
+        const seancesJour = getSeancesJour(state.emploiDuTemps, jour.date);
+        seancesJour.forEach(seance => {
+            const coursItem = document.createElement('div');
+            coursItem.className = `semaine-cours ${getClasseTypeCours(seance.aliasActivite)}`;
+            coursItem.style.position = 'absolute';
+
+            // Calculez la position et la hauteur
+            const heureDebut = convertirEnMinutes(seance.heureSeance) / 60;
+            const duree = convertirEnMinutes(seance.dureeSeance) / 60;
+            coursItem.style.top = `${(heureDebut - heuresDebut) * pixelsPar30Minutes * 2}px`;
+            coursItem.style.height = `${duree * pixelsPar30Minutes * 2}px`;
+
+            // Fixez une largeur uniforme pour tous les cours
+            coursItem.style.width = '90%'; // Ajustez la largeur selon vos besoins
+            coursItem.style.left = '5%'; // Centrez les cours dans la colonne
+
+            // Ajoutez les détails du cours, y compris les horaires
+            coursItem.innerHTML = `
+                <div class="semaine-cours-header">${seance.nomMatiere}</div>
+                <div class="semaine-cours-time">${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
+                <div class="semaine-cours-details">
+                    <span class="semaine-cours-prof">${seance.nomProf}</span>
+                    <span class="semaine-cours-salle">${seance.nomSalle}</span>
+                </div>
+            `;
+
+            // Ajoutez un événement de clic pour ouvrir la modale
+            coursItem.addEventListener('click', () => ouvrirModaleCours(seance));
+
+            cell.appendChild(coursItem);
+        });
+
         bodyRow.appendChild(cell);
     });
-    
+
     tbody.appendChild(bodyRow);
     table.appendChild(tbody);
-    
-      
+
     elements.semaineBody.appendChild(table);
 }
-
 function showAuthScreen() {
     elements.identificationScreen.style.display = 'flex';
     elements.edtScreen.style.display = 'none';

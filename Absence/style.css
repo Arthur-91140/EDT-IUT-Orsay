@@ -745,9 +745,21 @@ h4::after {
     width: fit-content;
     margin-left: auto;           /* <-- centrer */
     margin-right: auto;          /* <-- centrer */
+    box-shadow: 0 4px 20px rgba(99, 0, 60, 0.3);
+    position: relative;
 }
 
 .header-btn:hover {
     background: #63003C;
     color: white;
+    box-shadow: 0 4px 20px rgba(99, 0, 60, 0.3);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;           /* <-- centrer */
+    margin-right: auto;          /* <-- centrer */
+
+        
 }

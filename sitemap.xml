@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Page d'accueil du portail -->
+    <url>
+        <loc>https://arthur.pruvost-rivière.fr/service-iut/</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Service Emploi du Temps -->
+    <url>
+        <loc>https://arthur.pruvost-rivière.fr/edt-iut/</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Service Consultation des Absences -->
+    <url>
+        <loc>https://arthur.pruvost-rivière.fr/absence-iut/</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Page principale du site (si applicable) -->
+    <url>
+        <loc>https://arthur.pruvost-rivière.fr/</loc>
+        <lastmod>2025-05-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>

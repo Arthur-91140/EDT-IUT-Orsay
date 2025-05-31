@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Priorité aux services étudiants
+Allow: /service-iut/
+Allow: /edt-iut/
+Allow: /absence-iut/
+
+# Fichiers sitemap
+Sitemap: https://arthur.pruvost-rivière.fr/sitemap.xml
+
+# Optimisation pour les moteurs de recherche éducatifs
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bloquer certains bots inutiles pour économiser la bande passante
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

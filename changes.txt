@@ -1,0 +1,12 @@
+v1.0.0 - Création absence-iut
+
+v1.1.0 - Création edt-iut
+
+v1.2.0 - Création service-iut
+
+v1.2.1 - Ajout bouton "retour à l'accueil"
+
+v1.2.2 - Ajout heure dans la grid des séances
+
+v2.0.0 - Ajout optimisation SEO
+         Référencement google, bing

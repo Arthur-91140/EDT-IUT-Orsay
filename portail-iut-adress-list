@@ -1,0 +1,27 @@
+[Applications communes de l'IUT d'Orsay]
+Moodle="https://cours.iut-orsay.fr"
+Emploi-du-temps="https://edt.iut-orsay.fr"
+Git="https://git.iut-orsay.fr"
+Nextcloud="https://cloud.iut-orsay.fr"
+Application-des-comptes="https://comptes.iut-orsay.fr"
+
+ [Applications de l''université Paris-Saclay]
+ Messagerie="https://outlook.office365.com/mail/"
+ Annuaire-Adonis="https://adonis.universite-paris-saclay.fr/annuaire/index.php"
+
+ [Département Chimie]
+ Acces-aux-notes="https://notes.iut-orsay.fr"
+
+[Département Informatique]
+SOUS-SECTIONTelechargement-Machine-virtuelle-oracle="https://webapps.iut-orsay.fr/MachineVirtuelle/"
+SOUS-SECTIONTelechargement-Systemes-reseaux="https://webapps.iut-orsay.fr/systemes-reseaux/"
+SOUS-SECTIONTelechargement-RosIndigo="https://webapps.iut-orsay.fr/RosIndigo/"
+SOUS-SECTIONTelechargement-Visual-paradigm="https://webapps.iut-orsay.fr/bcoo/"
+Wiki-reseaux="https://webapps.iut-orsay.fr/sysres/"
+Guacamole="https://tpreseau.iut-orsay.fr"
+WebDev="https://webdev.iut-orsay.fr"
+Notes="https://webetu.iut-orsay.fr/ester"
+
+[Département-Mesures-Physiques]
+Notes="https://notes.iut-orsay.fr"
+Guacamole="https://remote.iut-orsay.fr/#/"

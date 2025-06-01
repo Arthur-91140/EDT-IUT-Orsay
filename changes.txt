@@ -10,3 +10,7 @@ v1.2.2 - Ajout heure dans la grid des séances
 
 v2.0.0 - Ajout optimisation SEO
          Référencement google, bing
+         Ajout portail iut
+         Ajout gestion thèmes
+         Ajout autentification centralisée
+         

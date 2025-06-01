@@ -62,220 +62,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Portail IUT Orsay">
-    
-    <!-- Données Structurées JSON-LD ultra-détaillées -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Portail IUT Orsay",
-        "alternateName": ["Services Étudiants IUT Orsay", "Portail Étudiant Orsay", "EDT IUT Orsay"],
-        "description": "Portail moderne des services étudiants de l'IUT d'Orsay permettant de consulter l'emploi du temps, les absences et accéder aux services en ligne en temps réel",
-        "url": "https://arthur.pruvost-rivière.fr/service-iut/",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": ["Web", "iOS", "Android", "Windows", "macOS", "Linux"],
-        "browserRequirements": "HTML5, CSS3, JavaScript ES6+",
-        "softwareVersion": "2.0",
-        "dateCreated": "2025-01-01",
-        "dateModified": "2025-05-31",
-        "downloadUrl": "https://arthur.pruvost-rivière.fr/service-iut/",
-        "installUrl": "https://arthur.pruvost-rivière.fr/service-iut/",
-        "screenshot": "https://arthur.pruvost-rivière.fr/images/portail-screenshot.jpg",
-        "applicationSuite": "Services IUT Orsay",
-        "permissions": "Consultation données étudiantes",
-        "storageRequirements": "5MB",
-        "memoryRequirements": "512MB",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
-        },
-        "provider": {
-            "@type": "EducationalOrganization",
-            "name": "Institut Universitaire de Technologie d'Orsay",
-            "alternateName": ["IUT Orsay", "IUT d'Orsay"],
-            "url": "https://www.iut-orsay.fr/",
-            "logo": "https://www.iut-orsay.fr/logo-iut-orsay.png",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Plateau du Moulon",
-                "addressLocality": "Orsay",
-                "addressRegion": "Île-de-France", 
-                "postalCode": "91400",
-                "addressCountry": "FR"
-            },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "48.6983",
-                "longitude": "2.1877"
-            },
-            "telephone": "+33169334000",
-            "email": "secretariat@iut-orsay.fr",
-            "parentOrganization": {
-                "@type": "EducationalOrganization",
-                "name": "Université Paris-Saclay",
-                "url": "https://www.universite-paris-saclay.fr/",
-                "sameAs": [
-                    "https://www.facebook.com/UniversiteParisSaclay",
-                    "https://twitter.com/UnivParisSaclay",
-                    "https://www.linkedin.com/school/université-paris-saclay/"
-                ]
-            },
-            "department": [
-                "Informatique",
-                "Génie Électrique et Informatique Industrielle",
-                "Mesures Physiques",
-                "Chimie"
-            ]
-        },
-        "featureList": [
-            "Consultation emploi du temps en temps réel",
-            "Suivi des absences étudiantes détaillé",
-            "Interface moderne et responsive",
-            "Navigation intuitive jour/semaine",
-            "Accès sécurisé aux services",
-            "Synchronisation API officielle IUT",
-            "Optimisation mobile et tablette",
-            "Statistiques d'assiduité",
-            "Gestion absences justifiées/non justifiées",
-            "Affichage par type de cours (TP, CM, TD, Projet, DS)",
-            "Recherche et filtrage avancés",
-            "Export calendrier personnel",
-            "Notifications temps réel",
-            "Mode hors ligne"
-        ],
-        "audience": {
-            "@type": "EducationalAudience",
-            "educationalRole": "student",
-            "audienceType": "Étudiants IUT Orsay"
-        },
-        "educationalLevel": "Enseignement Supérieur",
-        "inLanguage": "fr-FR",
-        "isAccessibleForFree": true,
-        "license": "MIT",
-        "creator": {
-            "@type": "Person",
-            "name": "Arthur Pruvost-Rivière",
-            "url": "https://arthur.pruvost-rivière.fr/",
-            "jobTitle": "Développeur Full Stack",
-            "affiliation": "IUT Orsay"
-        },
-        "keywords": [
-            "portail iut orsay",
-            "edt iut orsay", 
-            "absence iut orsay",
-            "emploi du temps orsay",
-            "services étudiants orsay",
-            "planning cours iut",
-            "université paris saclay",
-            "portail étudiant moderne",
-            "interface responsive iut",
-            "api iut orsay"
-        ],
-        "sameAs": [
-            "https://www.iut-orsay.fr/",
-            "https://www.universite-paris-saclay.fr/"
-        ],
-        "mainEntity": {
-            "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Comment accéder à mon emploi du temps IUT Orsay ?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Connectez-vous avec votre identifiant prénom.nom sur notre portail moderne. Consultez votre EDT en temps réel avec vue jour/semaine."
-                    }
-                },
-                {
-                    "@type": "Question", 
-                    "name": "Comment consulter mes absences IUT Orsay ?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Accédez à la section consultation des absences avec votre identifiant. Visualisez l'historique complet avec absences justifiées/non justifiées."
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-    
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Université Paris-Saclay",
-                "item": "https://www.universite-paris-saclay.fr/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "IUT Orsay",
-                "item": "https://www.iut-orsay.fr/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Portail Étudiants",
-                "item": "https://arthur.pruvost-rivière.fr/service-iut/"
-            }
-        ]
-    }
-    </script>
-    
-    <!-- Organization Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "IUT Orsay",
-        "alternateName": "Institut Universitaire de Technologie d'Orsay",
-        "url": "https://www.iut-orsay.fr/",
-        "logo": "https://www.iut-orsay.fr/logo-iut-orsay.png",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Plateau du Moulon",
-            "addressLocality": "Orsay",
-            "addressRegion": "Île-de-France",
-            "postalCode": "91400",
-            "addressCountry": "FR"
-        },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Services Étudiants IUT Orsay",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Consultation Emploi du Temps",
-                        "description": "Service de consultation de l'emploi du temps en temps réel"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service", 
-                        "name": "Consultation des Absences",
-                        "description": "Service de consultation de l'historique des absences"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-    
-    <!-- VOS LIENS CSS EXISTANTS -->
-    <link rel="stylesheet" href="accueil.css">
-    <script src="acceuil.js"></script>
+
+    <link rel="stylesheet" href="./accueil.css">
 </head>
 <body>
+    <!-- Particules animées en arrière-plan (générées par JavaScript) -->
+    <div class="particles" id="particlesContainer"></div>
+
     <header>
         <h1 class="header-title">IUT Orsay - Services Étudiants</h1>
     </header>
@@ -287,6 +80,23 @@
         </section>
         
         <div class="services">
+            <div class="service-card" data-delay="0">
+                <div class="card-3d-container">
+                    <div class="card-header">
+                        <div class="card-header-bg moodle-bg">
+                            <div class="card-icon">🎓</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="card-title">Moodle</h2>
+                        <p class="card-description">
+                            Accédez à la plateforme d'apprentissage en ligne de l'IUT. Retrouvez vos cours, devoirs, ressources pédagogiques.
+                        </p>
+                        <a href="https://cours.iut-orsay.fr" class="btn" target="_blank">Accéder à Moodle</a>
+                    </div>
+                </div>
+            </div>
+            
             <div class="service-card" data-delay="100">
                 <div class="card-3d-container">
                     <div class="card-header">
@@ -304,7 +114,7 @@
                 </div>
             </div>
             
-            <div class="service-card" data-delay="300">
+            <div class="service-card" data-delay="200">
                 <div class="card-3d-container">
                     <div class="card-header">
                         <div class="card-header-bg absence-bg">
@@ -321,6 +131,181 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Sections des applications organisées -->
+        <section class="applications-section">
+            <h2 class="section-title">Applications et Services</h2>
+            
+            <!-- Applications communes de l'IUT d'Orsay -->
+            <div class="dropdown-section" data-delay="300">
+                <div class="dropdown-header">
+                    <h3 class="dropdown-title">Applications communes de l'IUT d'Orsay</h3>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="app-grid">
+                        <a href="https://edt.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">📊</div>
+                                <span class="app-name">Emploi du temps</span>
+                            </div>
+                        </a>
+                        <a href="https://git.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">🔧</div>
+                                <span class="app-name">Git</span>
+                            </div>
+                        </a>
+                        <a href="https://cloud.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">☁️</div>
+                                <span class="app-name">Nextcloud</span>
+                            </div>
+                        </a>
+                        <a href="https://comptes.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">👤</div>
+                                <span class="app-name">Application des comptes</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Applications de l'université Paris-Saclay -->
+            <div class="dropdown-section" data-delay="400">
+                <div class="dropdown-header">
+                    <h3 class="dropdown-title">Applications de l'université Paris-Saclay</h3>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="app-grid">
+                        <a href="https://outlook.office365.com/mail/" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">📧</div>
+                                <span class="app-name">Messagerie</span>
+                            </div>
+                        </a>
+                        <a href="https://adonis.universite-paris-saclay.fr/annuaire/index.php" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">📋</div>
+                                <span class="app-name">Annuaire Adonis</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Département Chimie -->
+            <div class="dropdown-section" data-delay="500">
+                <div class="dropdown-header">
+                    <h3 class="dropdown-title">Département Chimie</h3>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="app-grid">
+                        <a href="https://notes.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">📊</div>
+                                <span class="app-name">Accès aux notes</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Département Informatique -->
+            <div class="dropdown-section" data-delay="600">
+                <div class="dropdown-header">
+                    <h3 class="dropdown-title">Département Informatique</h3>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="subsection">
+                        <h4 class="subsection-title">Téléchargement</h4>
+                        <div class="app-grid">
+                            <a href="https://webapps.iut-orsay.fr/MachineVirtuelle/" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">💻</div>
+                                    <span class="app-name">Machine virtuelle Oracle</span>
+                                </div>
+                            </a>
+                            <a href="https://webapps.iut-orsay.fr/systemes-reseaux/" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">🌐</div>
+                                    <span class="app-name">Systèmes réseaux</span>
+                                </div>
+                            </a>
+                            <a href="https://webapps.iut-orsay.fr/RosIndigo/" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">🤖</div>
+                                    <span class="app-name">RosIndigo</span>
+                                </div>
+                            </a>
+                            <a href="https://webapps.iut-orsay.fr/bcoo/" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">📐</div>
+                                    <span class="app-name">Visual Paradigm</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h4 class="subsection-title">Services</h4>
+                        <div class="app-grid">
+                            <a href="https://webapps.iut-orsay.fr/sysres/" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">📚</div>
+                                    <span class="app-name">Wiki réseaux</span>
+                                </div>
+                            </a>
+                            <a href="https://tpreseau.iut-orsay.fr" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">🖥️</div>
+                                    <span class="app-name">Guacamole</span>
+                                </div>
+                            </a>
+                            <a href="https://webdev.iut-orsay.fr" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">🌍</div>
+                                    <span class="app-name">WebDev</span>
+                                </div>
+                            </a>
+                            <a href="https://webetu.iut-orsay.fr/ester" class="app-link" target="_blank">
+                                <div class="app-card">
+                                    <div class="app-icon">📋</div>
+                                    <span class="app-name">Notes</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Département Mesures Physiques -->
+            <div class="dropdown-section" data-delay="700">
+                <div class="dropdown-header">
+                    <h3 class="dropdown-title">Département Mesures Physiques</h3>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-content">
+                    <div class="app-grid">
+                        <a href="https://notes.iut-orsay.fr" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">📊</div>
+                                <span class="app-name">Notes</span>
+                            </div>
+                        </a>
+                        <a href="https://remote.iut-orsay.fr/#/" class="app-link" target="_blank">
+                            <div class="app-card">
+                                <div class="app-icon">🖥️</div>
+                                <span class="app-name">Guacamole</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     
     <a href="#" class="back-to-top" id="backToTop">↑</a>
@@ -336,6 +321,5 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>

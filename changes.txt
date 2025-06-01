@@ -13,4 +13,5 @@ v2.0.0 - Ajout optimisation SEO
          Ajout portail iut
          Ajout gestion thèmes
          Ajout autentification centralisée
+         Ajout particle.js portail iut
          

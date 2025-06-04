@@ -653,7 +653,7 @@ function afficherVueHebdomadaire() {
 
             // Ajoutez les détails du cours, y compris les horaires
             coursItem.innerHTML = `
-                <div class="semaine-cours-header">${seance.nomMatiere}</div>
+                <div class="semaine-cours-title">${seance.nomMatiere}</div>
                 <div class="semaine-cours-time">${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
                 <div class="semaine-cours-details">
                     <span class="semaine-cours-prof">${seance.nomProf}</span>

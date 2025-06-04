@@ -573,25 +573,63 @@ function afficherVueHebdomadaire() {
     const table = document.createElement('table');
     table.className = 'semaine-table';
 
+    // Créer l'en-tête avec les jours
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    
+    // Cellule vide pour la colonne des heures
+    const emptyHeaderCell = document.createElement('th');
+    emptyHeaderCell.className = 'heure-header-cell';
+    headerRow.appendChild(emptyHeaderCell);
+    
+    // Ajouter les en-têtes des jours
+    jours.forEach(jour => {
+        const jourHeader = document.createElement('th');
+        jourHeader.className = 'jour-header';
+        jourHeader.innerHTML = `
+            <div class="jour-header-nom">${jour.nom.toUpperCase()}</div>
+            <div class="jour-header-date">${formatDateFr(jour.date)}</div>
+        `;
+        headerRow.appendChild(jourHeader);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
     const tbody = document.createElement('tbody');
     const bodyRow = document.createElement('tr');
+
+    // Créer la colonne des heures
+    const heuresCell = document.createElement('td');
+    heuresCell.className = 'heures-column';
+    
+    // Ajouter les heures dans la colonne dédiée
+    for (let heure = heuresDebut; heure <= heuresFin; heure++) {
+        for (let minute = 0; minute < 60; minute += 30) {
+            const heureDiv = document.createElement('div');
+            heureDiv.className = 'heure-label';
+            heureDiv.style.height = `${pixelsPar30Minutes}px`;
+            if (minute === 0) {
+                heureDiv.textContent = `${heure}h`;
+            } else {
+                heureDiv.textContent = `${heure}h${minute.toString().padStart(2, '0')}`;
+            }
+            heuresCell.appendChild(heureDiv);
+        }
+    }
+    bodyRow.appendChild(heuresCell);
 
     jours.forEach(jour => {
         const cell = document.createElement('td');
         cell.className = 'jour-column';
         cell.style.position = 'relative'; // Position relative pour placer les cours
 
-        // Ajoutez une grille horaire avec des intervalles de 30 minutes
+        // Ajouter une grille horaire avec des lignes guides
         for (let heure = heuresDebut; heure <= heuresFin; heure++) {
             for (let minute = 0; minute < 60; minute += 30) {
                 const heureDiv = document.createElement('div');
                 heureDiv.className = 'heure-ligne';
                 heureDiv.style.height = `${pixelsPar30Minutes}px`;
-                if (minute === 0) {
-                    heureDiv.textContent = `${heure}h`;
-                } else {
-                    heureDiv.textContent = `${heure}h${minute.toString().padStart(2, '0')}`;
-                }
                 cell.appendChild(heureDiv);
             }
         }
@@ -610,8 +648,8 @@ function afficherVueHebdomadaire() {
             coursItem.style.height = `${duree * pixelsPar30Minutes * 2}px`;
 
             // Fixez une largeur uniforme pour tous les cours
-            coursItem.style.width = '90%'; // Ajustez la largeur selon vos besoins
-            coursItem.style.left = '5%'; // Centrez les cours dans la colonne
+            coursItem.style.width = '100%'; // Ajustez la largeur selon vos besoins
+            coursItem.style.left = '0'; // Centrez les cours dans la colonne
 
             // Ajoutez les détails du cours, y compris les horaires
             coursItem.innerHTML = `

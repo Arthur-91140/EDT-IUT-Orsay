@@ -465,7 +465,7 @@ body {
 
 .jour-header {
     background: var(--primary-gradient);
-    color: var(--white);
+    color: var(--white) !important;
     padding: 1rem;
     position: relative;
     overflow: hidden;

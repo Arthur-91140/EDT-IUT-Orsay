@@ -933,7 +933,6 @@ input:focus {
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
 }
 
 .edt-navigation h3 {

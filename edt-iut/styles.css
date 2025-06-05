@@ -1173,7 +1173,7 @@ input:focus {
     text-align: center;
     background-color: var(--gray-100);
     font-weight: 600;
-    color: var(--gray-700);
+    color: var(--white);
     border-bottom: 2px solid var(--gray-300);
     transition: all var(--transition-normal);
     vertical-align: middle;

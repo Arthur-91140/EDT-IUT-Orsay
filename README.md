@@ -40,9 +40,27 @@ L'application utilise l'API de l'IUT d'Orsay pour récupérer :
 ## Structure du code
 
 ### Fichiers principaux
-- `index.html` : Structure HTML de l'application
-- `styles.css` : Styles et thème visuel
-- `app.js` : Logique de l'application et communication avec l'API
+racine
+|
+|____dossier service-iut(point d'entrée du projet)
+|    |
+|    |___acceuil.js
+|    |___accueil.css
+|    |___index.html
+|    |___logo.png (utilisé pour l'ensemble de l'app)
+|
+|____dossier edt-iut(accessible depuis service-iut)
+|    |
+|    |___app.js
+|    |___styles.css
+|    |___index.html
+|
+|____dossier absence-iut(accessible depuis service-iut)
+     |
+     |___script.js
+     |___styles.css
+     |___index.html
+
 
 ### Organisation du JavaScript
 - **Configuration** : Paramètres de l'API, couleurs par type de séance

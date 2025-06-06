@@ -28,9 +28,7 @@ const state = {
     error: null
 };
 
-
 const elements = {
-
     identificationScreen: document.getElementById('identification-screen'),
     edtScreen: document.getElementById('edt-screen'),
     
@@ -105,12 +103,18 @@ function init() {
 
     const backBtn = document.getElementById('back-btn');
 
-    backBtn.addEventListener('click', () => {
-        resultEl.style.display = 'none';
-        studentIdInput.value = '';
-        studentIdInput.focus();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            const resultEl = document.getElementById('result');
+            const studentIdInput = document.getElementById('student-id');
+            if (resultEl && studentIdInput) {
+                resultEl.style.display = 'none';
+                studentIdInput.value = '';
+                studentIdInput.focus();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
 }
 
 // Fonction d'initialisation de la modale
@@ -164,8 +168,6 @@ function initDates() {
     state.semaineFin = formatDate(dernierJour);
 }
 
-
-
 async function handleLogin(e) {
     e.preventDefault();
     
@@ -190,10 +192,8 @@ async function handleLogin(e) {
         const codeEtudiant = await getCodeEtudiant(identifiant);
         state.codeEtudiant = codeEtudiant;
         
-
         await getEmploiDuTemps(codeEtudiant, state.dateDebut, state.dateFin);
         
-
         showEdtScreen();
     } catch (error) {
         console.error('Erreur de connexion:', error);
@@ -243,12 +243,10 @@ async function getCodeEtudiant(identifiant) {
     }
 }
 
-
 async function getEmploiDuTemps(codeEtudiant, startDate, endDate) {
     setLoadingEdt(true);
     
     try {
-
         const responseSeances = await fetch(
             `${API_CONFIG.BASE_URL}/etudiants/${codeEtudiant}/seances?startDate=${startDate}&endDate=${endDate}`,
             {
@@ -363,27 +361,18 @@ function changerSemaine(direction) {
     state.semaineDebut = formatDate(debut);
     state.semaineFin = formatDate(fin);
     
-      
     getEmploiDuTemps(state.codeEtudiant, state.semaineDebut, state.semaineFin);
 }
 
-  
-
-  
-  
 function afficherVueJournaliere() {
-      
     const jourSemaine = getJourSemaine(state.dateDebut);
     const dateFormatee = formatDateFr(state.dateDebut);
     elements.jourTitre.textContent = `${jourSemaine} ${dateFormatee}`;
     
-      
     elements.coursList.innerHTML = '';
     
-      
     const seancesJour = getSeancesJour(state.emploiDuTemps, state.dateDebut);
     
-      
     if (seancesJour.length === 0) {
         const emptyDayMessage = document.createElement('div');
         emptyDayMessage.className = 'empty-day-message';
@@ -392,51 +381,38 @@ function afficherVueJournaliere() {
         return;
     }
     
-      
     seancesJour.sort((a, b) => a.heureSeance - b.heureSeance);
     
-      
     let totalMinutesCours = 0;
     seancesJour.forEach(seance => {
-          
         const heuresDuree = Math.floor(seance.dureeSeance / 100);
         const minutesDuree = seance.dureeSeance % 100;
         totalMinutesCours += (heuresDuree * 60 + minutesDuree);
     });
     
-      
-    const pixelsParMinuteCours = 1.5;   
+    const pixelsParMinuteCours = 1.5;
     
-      
     let derniereHeureFin = null;
     
     seancesJour.forEach((seance, index) => {
-          
         const heureDebutActuel = convertirEnMinutes(seance.heureSeance);
         
-          
         const heuresDuree = Math.floor(seance.dureeSeance / 100);
         const minutesDuree = seance.dureeSeance % 100;
         const dureeCoursMinutes = heuresDuree * 60 + minutesDuree;
         
-          
         const heureFinActuel = heureDebutActuel + dureeCoursMinutes;
         
-          
         if (derniereHeureFin !== null) {
             const pauseMinutes = heureDebutActuel - derniereHeureFin;
             
-              
             if (pauseMinutes > 15) {
-                  
                 const pauseElement = document.createElement('div');
                 pauseElement.className = 'cours-gap';
                 
-                  
                 const hauteurPause = pauseMinutes * pixelsParMinuteCours;
                 pauseElement.style.height = `${hauteurPause}px`;
                 
-                  
                 let pauseTexte = '';
                 if (pauseMinutes >= 60) {
                     const heures = Math.floor(pauseMinutes / 60);
@@ -451,29 +427,24 @@ function afficherVueJournaliere() {
             }
         }
         
-          
         const coursItem = document.createElement('div');
         coursItem.className = `cours-item ${getClasseTypeCours(seance.aliasActivite)}`;
         
-        // Stocker une référence à l'objet séance pour la modale (ajouté)
+        // Stocker une référence à l'objet séance pour la modale
         coursItem.setAttribute('data-seance-index', index);
         coursItem.style.cursor = 'pointer';
         
-          
         const hauteurCours = dureeCoursMinutes * pixelsParMinuteCours;
-        coursItem.style.minHeight = `${Math.max(hauteurCours, 110)}px`;   
+        coursItem.style.minHeight = `${Math.max(hauteurCours, 110)}px`;
         
-          
         const coursHeader = document.createElement('div');
         coursHeader.className = 'cours-header';
         
-          
         const coursTitle = document.createElement('div');
         coursTitle.className = 'cours-title';
         coursTitle.textContent = seance.nomMatiere;
         coursHeader.appendChild(coursTitle);
         
-          
         const coursType = document.createElement('div');
         coursType.className = `cours-type ${getClasseTypeCours(seance.aliasActivite)}`;
         coursType.textContent = seance.nomActivite;
@@ -481,19 +452,15 @@ function afficherVueJournaliere() {
         
         coursItem.appendChild(coursHeader);
         
-          
         const coursTime = document.createElement('div');
         coursTime.className = 'cours-time';
         coursTime.textContent = `${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}`;
         coursItem.appendChild(coursTime);
         
-          
         const coursDetails = document.createElement('div');
         coursDetails.className = 'cours-details';
         
-          
         if (seance.nomProf && seance.prenomProf) {
-              
             const profNoms = seance.nomProf.split(', ');
             const profPrenoms = seance.prenomProf.split(', ');
             
@@ -512,9 +479,7 @@ function afficherVueJournaliere() {
             coursDetails.appendChild(coursProf);
         }
         
-           
         if (seance.nomSalle) {
-               
             const sallesNoms = seance.nomSalle.split(', ');
             const sallesUniques = [...new Set(sallesNoms)].filter(s => s && s !== 'null');
             
@@ -530,16 +495,15 @@ function afficherVueJournaliere() {
         coursItem.appendChild(coursDetails);
         elements.coursList.appendChild(coursItem);
         
-        // Ajouter l'événement de clic pour ouvrir la modale (ajouté)
+        // Ajouter l'événement de clic pour ouvrir la modale
         coursItem.addEventListener('click', function() {
             ouvrirModaleCours(seance);
         });
-          
+        
         derniereHeureFin = heureFinActuel;
     });
 }
 
-  
 function convertirEnMinutes(heure) {
     if (!heure && heure !== 0) return 0;
     
@@ -550,7 +514,7 @@ function convertirEnMinutes(heure) {
     return heures * 60 + minutes;
 }
 
-  
+// Fonction améliorée pour l'affichage de la vue hebdomadaire avec gestion des cours courts
 function afficherVueHebdomadaire() {
     const heuresDebut = 8; // Heure de début de la journée
     const heuresFin = 19; // Heure de fin de la journée
@@ -573,30 +537,68 @@ function afficherVueHebdomadaire() {
     const table = document.createElement('table');
     table.className = 'semaine-table';
 
+    // Créer l'en-tête avec les jours
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    
+    // Cellule vide pour la colonne des heures
+    const emptyHeaderCell = document.createElement('th');
+    emptyHeaderCell.className = 'heure-header-cell';
+    headerRow.appendChild(emptyHeaderCell);
+    
+    // Ajouter les en-têtes des jours
+    jours.forEach(jour => {
+        const jourHeader = document.createElement('th');
+        jourHeader.className = 'jour-header';
+        jourHeader.innerHTML = `
+            <div class="jour-header-nom">${jour.nom.toUpperCase()}</div>
+            <div class="jour-header-date">${formatDateFr(jour.date)}</div>
+        `;
+        headerRow.appendChild(jourHeader);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
     const tbody = document.createElement('tbody');
     const bodyRow = document.createElement('tr');
+
+    // Créer la colonne des heures
+    const heuresCell = document.createElement('td');
+    heuresCell.className = 'heures-column';
+    
+    // Ajouter les heures dans la colonne dédiée
+    for (let heure = heuresDebut; heure <= heuresFin; heure++) {
+        for (let minute = 0; minute < 60; minute += 30) {
+            const heureDiv = document.createElement('div');
+            heureDiv.className = 'heure-label';
+            heureDiv.style.height = `${pixelsPar30Minutes}px`;
+            if (minute === 0) {
+                heureDiv.textContent = `${heure}h`;
+            } else {
+                heureDiv.textContent = `${heure}h${minute.toString().padStart(2, '0')}`;
+            }
+            heuresCell.appendChild(heureDiv);
+        }
+    }
+    bodyRow.appendChild(heuresCell);
 
     jours.forEach(jour => {
         const cell = document.createElement('td');
         cell.className = 'jour-column';
         cell.style.position = 'relative'; // Position relative pour placer les cours
 
-        // Ajoutez une grille horaire avec des intervalles de 30 minutes
+        // Ajouter une grille horaire avec des lignes guides
         for (let heure = heuresDebut; heure <= heuresFin; heure++) {
             for (let minute = 0; minute < 60; minute += 30) {
                 const heureDiv = document.createElement('div');
                 heureDiv.className = 'heure-ligne';
                 heureDiv.style.height = `${pixelsPar30Minutes}px`;
-                if (minute === 0) {
-                    heureDiv.textContent = `${heure}h`;
-                } else {
-                    heureDiv.textContent = `${heure}h${minute.toString().padStart(2, '0')}`;
-                }
                 cell.appendChild(heureDiv);
             }
         }
 
-        // Positionnez les cours
+        // Positionnez les cours avec gestion améliorée des cours courts
         const seancesJour = getSeancesJour(state.emploiDuTemps, jour.date);
         seancesJour.forEach(seance => {
             const coursItem = document.createElement('div');
@@ -606,22 +608,42 @@ function afficherVueHebdomadaire() {
             // Calculez la position et la hauteur
             const heureDebut = convertirEnMinutes(seance.heureSeance) / 60;
             const duree = convertirEnMinutes(seance.dureeSeance) / 60;
+            const hauteurCalculee = duree * pixelsPar30Minutes * 2;
+            
             coursItem.style.top = `${(heureDebut - heuresDebut) * pixelsPar30Minutes * 2}px`;
-            coursItem.style.height = `${duree * pixelsPar30Minutes * 2}px`;
+            coursItem.style.height = `${Math.max(hauteurCalculee, 60)}px`; // Hauteur minimum de 60px
+            coursItem.style.width = '100%';
+            coursItem.style.left = '0';
 
-            // Fixez une largeur uniforme pour tous les cours
-            coursItem.style.width = '90%'; // Ajustez la largeur selon vos besoins
-            coursItem.style.left = '5%'; // Centrez les cours dans la colonne
+            // Déterminer le contenu selon la hauteur disponible
+            let contenuHtml = '';
+            const hauteurPx = Math.max(hauteurCalculee, 60);
+            
+            if (hauteurPx >= 80) {
+                // Cours normal - Affichage complet
+                contenuHtml = `
+                    <div class="semaine-cours-header">${seance.nomMatiere}</div>
+                    <div class="semaine-cours-time">${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
+                    <div class="semaine-cours-details">
+                        <span class="semaine-cours-prof">${seance.nomProf || ''}</span>
+                        <span class="semaine-cours-salle">${seance.nomSalle || ''}</span>
+                    </div>
+                `;
+            } else if (hauteurPx >= 60) {
+                // Cours court - Affichage optimisé sans détails
+                contenuHtml = `
+                    <div class="semaine-cours-header">${seance.nomMatiere}</div>
+                    <div class="semaine-cours-time">${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
+                `;
+            } else {
+                // Cours très court - Titre et heure uniquement
+                contenuHtml = `
+                    <div class="semaine-cours-header" style="font-size: 0.85rem; margin-bottom: 0.1rem;">${seance.nomMatiere}</div>
+                    <div class="semaine-cours-time" style="font-size: 0.75rem;">${formatHeure(seance.heureSeance)}-${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
+                `;
+            }
 
-            // Ajoutez les détails du cours, y compris les horaires
-            coursItem.innerHTML = `
-                <div class="semaine-cours-header">${seance.nomMatiere}</div>
-                <div class="semaine-cours-time">${formatHeure(seance.heureSeance)} - ${calculerHeureFin(seance.heureSeance, seance.dureeSeance)}</div>
-                <div class="semaine-cours-details">
-                    <span class="semaine-cours-prof">${seance.nomProf}</span>
-                    <span class="semaine-cours-salle">${seance.nomSalle}</span>
-                </div>
-            `;
+            coursItem.innerHTML = contenuHtml;
 
             // Ajoutez un événement de clic pour ouvrir la modale
             coursItem.addEventListener('click', () => ouvrirModaleCours(seance));
@@ -637,6 +659,7 @@ function afficherVueHebdomadaire() {
 
     elements.semaineBody.appendChild(table);
 }
+
 function showAuthScreen() {
     elements.identificationScreen.style.display = 'flex';
     elements.edtScreen.style.display = 'none';
@@ -650,7 +673,6 @@ function showEdtScreen() {
     elements.logoutBtn.style.display = 'block';
     elements.userInfo.textContent = `Connecté en tant que ${state.identifiant}`;
     
-      
     changerVue(state.vue);
 }
 
@@ -702,6 +724,23 @@ function formatHeure(heure) {
     return `${heuresSansZero}h${minutes}`;
 }
 
+// Fonction utilitaire pour formater les heures courtes
+function formatHeureCompacte(heure) {
+    if (!heure && heure !== 0) return '';
+    
+    let heureStr = heure.toString().padStart(4, '0');
+    const heures = heureStr.substring(0, 2);
+    const minutes = heureStr.substring(2, 4);
+    
+    const heuresSansZero = heures.charAt(0) === '0' ? heures.charAt(1) : heures;
+    
+    // Format compact : 10h ou 10h30
+    if (minutes === '00') {
+        return `${heuresSansZero}h`;
+    }
+    return `${heuresSansZero}h${minutes}`;
+}
+
 function calculerHeureFin(heureDebut, duree) {
     if ((!heureDebut && heureDebut !== 0) || !duree) return '';
     
@@ -742,13 +781,9 @@ function getMoisAnnee(dateStr) {
 function getNumeroSemaine(dateStr) {
     const date = new Date(dateStr);
     date.setHours(0, 0, 0, 0);
-      
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-      
     const semaine1 = new Date(date.getFullYear(), 0, 4);
-      
     semaine1.setDate(semaine1.getDate() + 3 - (semaine1.getDay() + 6) % 7);
-      
     return 1 + Math.round(((date.getTime() - semaine1.getTime()) / 86400000 - 3 + (semaine1.getDay() + 6) % 7) / 7);
 }
 
@@ -758,7 +793,7 @@ function getJoursSemaine(dateDebut) {
     const debut = new Date(dateDebut);
     const jours = [];
     
-    for (let i = 0; i < 5; i++) {   
+    for (let i = 0; i < 5; i++) {
         const jour = new Date(debut);
         jour.setDate(debut.getDate() + i);
         jours.push({
@@ -899,8 +934,6 @@ function ouvrirModaleCours(seance, jourStr = null, dateStr = null) {
     // Bloquer le scroll du body
     document.body.style.overflow = 'hidden';
 }
-
-
 
 function fermerModaleCours() {
     if (elements.modalOverlay) {

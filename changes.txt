@@ -13,6 +13,6 @@ v2.0.0 - Ajout optimisation SEO
          Ajout portail iut
          Ajout particle.js portail iut
 
-v2.1.0 - Ajout gestion thèmes
-         Ajout autentification centralisée
+v2.1.0 - Obfuscation complète javascript
+         
          

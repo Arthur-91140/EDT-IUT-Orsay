@@ -10,6 +10,7 @@ const API_CONFIG = {
 // Configuration des couleurs pour les types de séances
 const COULEURS = {
     'TP': 'tp',
+    'TD': 'tp', // Utiliser la même couleur que TP
     'CM': 'cm',
     'PRO': 'pro',
     'RESA': 'resa',
